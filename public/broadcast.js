@@ -1,14 +1,22 @@
 const peerConnections = {};
 const config = {
   iceServers: [
-    { 
-      "urls": "stun:stun.l.google.com:19302",
-    },
     // { 
-    //   "urls": "turn:TURN_IP?transport=tcp",
-    //   "username": "TURN_USERNAME",
-    //   "credential": "TURN_CREDENTIALS"
-    // }
+    //   "urls": "stun:stun.l.google.com:19302",
+    // },
+    // // { 
+    // //   "urls": "turn:TURN_IP?transport=tcp",
+    // //   "username": "TURN_USERNAME",
+    // //   "credential": "TURN_CREDENTIALS"
+    // // }
+    {
+      "urls":"stun:stun.mediapilot.io"
+    },
+    {
+      "urls":"turn:turn.mediapilot.io",
+      "username": "guest",
+     "credential": "somepassword"
+    }
   ]
 };
 
@@ -16,6 +24,7 @@ const socket = io.connect(window.location.origin);
 
 socket.on("answer", (id, description) => {
   peerConnections[id].setRemoteDescription(description);
+  console.log(peerConnections)
 });
 
 socket.on("watcher", id => {

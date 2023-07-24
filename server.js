@@ -20,6 +20,7 @@ io.sockets.on("connection", socket => {
     socket.to(broadcaster).emit("watcher", socket.id);
   });
   socket.on("offer", (id, message) => {
+    console.log('ON OFFER', message)
     socket.to(id).emit("offer", socket.id, message);
   });
   socket.on("answer", (id, message) => {
